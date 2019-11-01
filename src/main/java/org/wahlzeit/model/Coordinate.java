@@ -42,7 +42,8 @@ public class Coordinate{
 	}
 
 	public boolean isEqual(Coordinate coord){
-		if(this.getX()==coord.getX() && this.getY()==coord.getY() && this.getZ()==coord.getZ()){
+		double eps=1e-5;
+		if(Math.abs(this.getX()-coord.getX())<eps && Math.abs(this.getY()-coord.getY())<eps && Math.abs(this.getZ()-coord.getZ())<eps){
 			return true;
 		}
 		else{

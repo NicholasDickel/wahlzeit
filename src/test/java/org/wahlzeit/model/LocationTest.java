@@ -6,7 +6,7 @@ import static org.junit.Assert.assertEquals;
 public class LocationTest {
 
 	@Test
-	public void setupTest() {
+	public void testSetup() {
 		double eps=1e-15;
 		Location loc = new Location();
 		assertEquals(0.0, loc.coordinate.getX(),eps);
