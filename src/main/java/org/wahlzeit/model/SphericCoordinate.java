@@ -1,6 +1,6 @@
 package org.wahlzeit.model;
 
-public class SphericCoordinate implements Coordinate{
+public class SphericCoordinate extends AbstractCoordinate{
 	private double phi, theta, radius;
 
 	public SphericCoordinate(){
@@ -65,17 +65,5 @@ public class SphericCoordinate implements Coordinate{
 		return asCartesianCoordinate().isEqual(coord);
 	}
 
-	@Override
-	public boolean equals(Object o){
-		if (o==this){
-			return true;
-		}
-		if (!(o instanceof Coordinate)){
-			return false;
-		}
-		Coordinate c = (Coordinate) o;
-		return isEqual(c);
-
-	}
 
 }

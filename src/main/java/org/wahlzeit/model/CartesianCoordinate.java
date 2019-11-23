@@ -1,6 +1,6 @@
 package org.wahlzeit.model;
 
-public class CartesianCoordinate implements Coordinate{
+public class CartesianCoordinate extends AbstractCoordinate{
 
 	private double x, y, z;
 
@@ -79,18 +79,7 @@ public class CartesianCoordinate implements Coordinate{
 		}
 	}
 
-	@Override
-	public boolean equals(Object o){
-		if (o==this){
-			return true;
-		}
-		if (!(o instanceof Coordinate)){
-			return false;
-		}
-		Coordinate c = (Coordinate) o;
-		return isEqual(c);
-
-	}
+	
 
 
 }
