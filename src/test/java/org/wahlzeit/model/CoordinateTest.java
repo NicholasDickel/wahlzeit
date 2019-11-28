@@ -60,6 +60,51 @@ public class CoordinateTest {
 		assertTrue(c1.equals(c5));
 		assertTrue(c3.equals(c6));
 
+	}
+
+	@Test
+	public void testIllegalArguments(){
+		CartesianCoordinate c = new CartesianCoordinate(1,2,3);
+		SphericCoordinate s = new SphericCoordinate(0.8,0.8,3);
+
+		try {
+			c.assertClassInvariants();
+		} 
+		catch(Exception e) {
+			assertTrue(false);
+		}
+
+		try {
+			s.assertClassInvariants();
+		} 
+		catch(Exception e) {
+			assertTrue(false);
+		}
+		
+		//exception wanted!
+		try {
+			s.setPhi(-1);
+			assertTrue(false);
+		} 
+		catch(AssertionError ae) {}		
+
+		try {
+			s.setTheta(-1);
+			assertTrue(false);
+		} 
+		catch(AssertionError ae) {}	
+
+		try {
+			s.setRadius(-1);
+			assertTrue(false);
+		} 
+		catch(AssertionError ae) {}	
+
+		try{
+			c.assertNotNull(null);
+			assertTrue(false);
+		}
+		catch(NullPointerException ne) {}
 		
 	}
 

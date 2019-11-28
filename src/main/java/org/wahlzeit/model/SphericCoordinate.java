@@ -30,16 +30,19 @@ public class SphericCoordinate extends AbstractCoordinate{
 		return this.radius;
 	}
 	public void setPhi(double newPhi){
+		assertNotNull(newPhi);
 		assert 0 <= newPhi && newPhi <= Math.PI;
 		this.phi=newPhi;
 		assertClassInvariants();
 	}
 	public void setTheta(double newTheta){
+		assertNotNull(newTheta);
 		assert 0 <= newTheta && newTheta <= 2 * Math.PI;
 		this.theta=newTheta;
 		assertClassInvariants();
 	}
 	public void setRadius(double newRadius){
+		assertNotNull(newRadius);
 		assert newRadius >= 0;
 		this.radius=newRadius;
 		assertClassInvariants();
