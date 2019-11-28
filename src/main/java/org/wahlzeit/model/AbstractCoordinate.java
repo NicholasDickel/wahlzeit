@@ -1,5 +1,4 @@
 package org.wahlzeit.model;
-import static org.junit.Assert.assertNotNull;
 
 public abstract class AbstractCoordinate implements Coordinate{
 
@@ -84,17 +83,22 @@ public abstract class AbstractCoordinate implements Coordinate{
 		return eq;
 	}
 
-	public abstract CartesianCoordinate doAsCartesianCoordinate();
-	public abstract double doGetCartesianDistance(Coordinate c);
-	public abstract SphericCoordinate doAsSphericCoordinate();
-	public abstract double doGetCentralAngle(Coordinate c);
-	public abstract boolean doIsEqual(Coordinate c);
+	protected abstract CartesianCoordinate doAsCartesianCoordinate();
+	protected abstract double doGetCartesianDistance(Coordinate c);
+	protected abstract SphericCoordinate doAsSphericCoordinate();
+	protected abstract double doGetCentralAngle(Coordinate c);
+	protected abstract boolean doIsEqual(Coordinate c);
 
 
 	//Design by Contract
-	protected abstract void assertClassInvariants();
+	public abstract void assertClassInvariants();
 
-	@Override
+	protected void assertNotNull(Object o) throws NullPointerException{
+		if(o==null){
+			throw new NullPointerException();
+		}
+	}
+
 	public boolean equals(Object o){
 		if (o==this){
 			return true;

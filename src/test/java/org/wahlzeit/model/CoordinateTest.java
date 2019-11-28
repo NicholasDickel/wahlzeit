@@ -39,7 +39,7 @@ public class CoordinateTest {
 	public void testDistanceCartesian() {
 		CartesianCoordinate c1 = new CartesianCoordinate(1,2,3);
 		CartesianCoordinate c2 = new CartesianCoordinate(3,5,7);
-		assertEquals(5.3851648,c1.getDistance(c2),1e-7);
+		assertEquals(5.3851648,c1.getCartesianDistance(c2),1e-7);
 	}
 
 	@Test

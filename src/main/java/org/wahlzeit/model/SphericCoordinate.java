@@ -46,7 +46,7 @@ public class SphericCoordinate extends AbstractCoordinate{
 	}
 
 	@Override
-	protected CartesianCoordinate dpAsCartesianCoordinate(){
+	protected CartesianCoordinate doAsCartesianCoordinate(){
 		double x = radius * Math.sin(theta) * Math.cos(phi);
 		double y = radius * Math.sin(theta) * Math.sin(phi);
 		double z = radius * Math.cos(theta);
@@ -75,7 +75,7 @@ public class SphericCoordinate extends AbstractCoordinate{
 	}
 
 	@Override
-	protected void assertClassInvariants(){
+	public void assertClassInvariants(){
 		assertNotNull(phi);
 		assertNotNull(theta);
 		assertNotNull(radius);

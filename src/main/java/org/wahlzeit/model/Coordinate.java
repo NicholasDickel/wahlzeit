@@ -9,6 +9,5 @@ public interface Coordinate{
 	public boolean isEqual(Coordinate c);
 
 	//Design by contract
-	protected void assertClassInvariants();
-
+	public void assertClassInvariants();
 }

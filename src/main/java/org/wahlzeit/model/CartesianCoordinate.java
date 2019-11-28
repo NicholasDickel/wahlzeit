@@ -1,6 +1,5 @@
 package org.wahlzeit.model;
 
-import static org.junit.Assert.assertNotNull;
 
 public class CartesianCoordinate extends AbstractCoordinate{
 
@@ -91,7 +90,7 @@ public class CartesianCoordinate extends AbstractCoordinate{
 	}
 
 	@Override
-	protected void assertClassInvariants(){
+	public void assertClassInvariants(){
 		assertNotNull(x);
 		assertNotNull(y);
 		assertNotNull(z);
