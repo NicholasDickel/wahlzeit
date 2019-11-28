@@ -18,26 +18,35 @@ public class SphericCoordinate extends AbstractCoordinate{
 	}
 	
 	public double getPhi(){
-		return this.phi;
+		assertClassInvariants();
+		return phi;
 	}
 	public double getTheta(){
+		assertClassInvariants();
 		return this.theta;
 	}
 	public double getRadius(){
+		assertClassInvariants();
 		return this.radius;
 	}
-	public void setPhi(double phi){
-		this.phi=phi;
+	public void setPhi(double newPhi){
+		assert 0 <= newPhi && newPhi <= Math.PI;
+		this.phi=newPhi;
+		assertClassInvariants();
 	}
-	public void setTheta(double theta){
-		this.theta=theta;
+	public void setTheta(double newTheta){
+		assert 0 <= newTheta && newTheta <= 2 * Math.PI;
+		this.theta=newTheta;
+		assertClassInvariants();
 	}
-	public void setRadius(double radius){
-		this.radius=radius;
+	public void setRadius(double newRadius){
+		assert newRadius >= 0;
+		this.radius=newRadius;
+		assertClassInvariants();
 	}
 
 	@Override
-	public CartesianCoordinate asCartesianCoordinate(){
+	protected CartesianCoordinate dpAsCartesianCoordinate(){
 		double x = radius * Math.sin(theta) * Math.cos(phi);
 		double y = radius * Math.sin(theta) * Math.sin(phi);
 		double z = radius * Math.cos(theta);
@@ -45,25 +54,34 @@ public class SphericCoordinate extends AbstractCoordinate{
 	}
 
 	@Override
-	public double getCartesianDistance(Coordinate coord){
+	protected double doGetCartesianDistance(Coordinate coord){
 		return asCartesianCoordinate().getCartesianDistance(coord);
 	}
 
 	@Override
-	public SphericCoordinate asSphericCoordinate(){
+	protected SphericCoordinate doAsSphericCoordinate(){
 		return this;
 	}
 
 	@Override
-	public double getCentralAngle(Coordinate coord){
+	protected double doGetCentralAngle(Coordinate coord){
 		SphericCoordinate c = coord.asSphericCoordinate();
 		return Math.acos(Math.sin(theta)*Math.sin(c.getTheta()) + Math.cos(theta)*Math.cos(c.getTheta())*Math.cos(Math.abs(phi-c.getPhi())));
 	}
 
 	@Override
-	public boolean isEqual(Coordinate coord){
+	protected boolean doIsEqual(Coordinate coord){
 		return asCartesianCoordinate().isEqual(coord);
 	}
 
+	@Override
+	protected void assertClassInvariants(){
+		assertNotNull(phi);
+		assertNotNull(theta);
+		assertNotNull(radius);
 
+		assert 0 <= phi && phi <= Math.PI;
+		assert 0 <= theta && theta <= 2 * Math.PI;
+		assert radius >= 0;
+	}
 }

@@ -1,5 +1,7 @@
 package org.wahlzeit.model;
 
+import static org.junit.Assert.assertNotNull;
+
 public class CartesianCoordinate extends AbstractCoordinate{
 
 	private double x, y, z;
@@ -19,35 +21,44 @@ public class CartesianCoordinate extends AbstractCoordinate{
 	}
 	
 	public double getX(){
-		return this.x;
+		assertClassInvariants();
+		return x;
 	}
 	public double getY(){
-		return this.y;
+		assertClassInvariants();
+		return y;
 	}
 	public double getZ(){
-		return this.z;
+		assertClassInvariants();
+		return z;
 	}
-	public void setX(double x){
-		this.x=x;
+	public void setX(double newX){
+		assertNotNull(newX);
+		this.x=newX;
+		assertClassInvariants();
 	}
-	public void setY(double y){
-		this.y=y;
+	public void setY(double newY){
+		assertNotNull(newY);
+		this.y=newY;
+		assertClassInvariants();
 	}
-	public void setZ(double z){
-		this.z=z;
+	public void setZ(double newZ){
+		assertNotNull(newZ);
+		this.z=newZ;
+		assertClassInvariants();
 	}
 
-	public double getDistance(CartesianCoordinate coord){
+	private double getDistance(CartesianCoordinate coord){
 		return Math.sqrt(Math.pow(this.getX() - coord.getX(), 2) + Math.pow(this.getY() - coord.getY(), 2) + Math.pow(this.getZ() - coord.getZ(), 2));
 	}
 
 	@Override
-	public CartesianCoordinate asCartesianCoordinate(){
+	protected CartesianCoordinate doAsCartesianCoordinate(){
 		return this;
 	}
 
 	@Override
-	public SphericCoordinate asSphericCoordinate(){
+	protected SphericCoordinate doAsSphericCoordinate(){
 		CartesianCoordinate ground=new CartesianCoordinate(0,0,0);
 		double radius=getDistance(ground);
 		double theta=Math.acos(z/radius);
@@ -57,18 +68,18 @@ public class CartesianCoordinate extends AbstractCoordinate{
 	}
 
 	@Override
-	public double getCartesianDistance(Coordinate coord){
+	protected double doGetCartesianDistance(Coordinate coord){
 		CartesianCoordinate c = coord.asCartesianCoordinate();
 		return getDistance(c);
 	}
 
 	@Override
-	public double getCentralAngle(Coordinate coord){
+	protected double doGetCentralAngle(Coordinate coord){
 		return asSphericCoordinate().getCentralAngle(coord);
 	}
 
 	@Override
-	public boolean isEqual(Coordinate c){
+	protected boolean doIsEqual(Coordinate c){
 		CartesianCoordinate coord = c.asCartesianCoordinate();
 		double eps=1e-5;
 		if(Math.abs(this.getX()-coord.getX())<eps && Math.abs(this.getY()-coord.getY())<eps && Math.abs(this.getZ()-coord.getZ())<eps){
@@ -79,7 +90,11 @@ public class CartesianCoordinate extends AbstractCoordinate{
 		}
 	}
 
-	
-
+	@Override
+	protected void assertClassInvariants(){
+		assertNotNull(x);
+		assertNotNull(y);
+		assertNotNull(z);
+	}
 
 }
