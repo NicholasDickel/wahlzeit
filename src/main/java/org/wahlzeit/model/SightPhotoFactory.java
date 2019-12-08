@@ -40,7 +40,7 @@ public class SightPhotoFactory extends PhotoFactory{
 	/**
 	 * Method to set the singleton instance of PhotoFactory.
 	 */
-	protected static synchronized void setInstance(SightPhotoFactory photoFactory) {
+	protected static synchronized void setInstance(SightPhotoFactory photoFactory) throws NullPointerException{
 		if (instance != null) {
 			throw new IllegalStateException("attempt to initalize PhotoFactory twice");
 		}
@@ -58,7 +58,7 @@ public class SightPhotoFactory extends PhotoFactory{
 	/**
 	 * Creates a new photo with the specified id
 	 */
-	public SightPhoto createPhoto(PhotoId id) {
+	public SightPhoto createPhoto(PhotoId id) throws NullPointerException {
 		return new SightPhoto(id);
 	}
 

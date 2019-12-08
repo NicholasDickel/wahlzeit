@@ -22,10 +22,10 @@ public class SightPhoto extends Photo{
 	public String getSightType(){
 		return sightType;
 	}
-	public void setSightName(String name){
+	public void setSightName(String name) throws NullPointerException{
 		sightName=name;
 	}
-	public void setSightType(String type){
+	public void setSightType(String type) throws NullPointerException{
 		sightType=type;
 	}
 

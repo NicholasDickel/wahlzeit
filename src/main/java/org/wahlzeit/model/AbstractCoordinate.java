@@ -2,7 +2,7 @@ package org.wahlzeit.model;
 
 public abstract class AbstractCoordinate implements Coordinate{
 
-	public CartesianCoordinate asCartesianCoordinate(){
+	public CartesianCoordinate asCartesianCoordinate() throws NullPointerException{
 		//Preconditions
 		assertClassInvariants();
 
@@ -15,12 +15,11 @@ public abstract class AbstractCoordinate implements Coordinate{
 
 		return coord;
 	}
-	public double getCartesianDistance(Coordinate c){
+	public double getCartesianDistance(Coordinate c) throws NullPointerException{
 		//Preconditions
 		assertNotNull(c);
 
 		assertClassInvariants();
-		c.assertClassInvariants();
 
 		//do
 		double distance = doGetCartesianDistance(c);
@@ -29,11 +28,10 @@ public abstract class AbstractCoordinate implements Coordinate{
 		assert distance >= 0;
 
 		assertClassInvariants();
-		c.assertClassInvariants();
 
 		return distance;
 	}
-	public SphericCoordinate asSphericCoordinate(){
+	public SphericCoordinate asSphericCoordinate() throws NullPointerException{
 		//Preconditions
 		assertClassInvariants();
 
@@ -48,12 +46,11 @@ public abstract class AbstractCoordinate implements Coordinate{
 
 		return coord;
 	}
-	public double getCentralAngle(Coordinate c){
+	public double getCentralAngle(Coordinate c) throws NullPointerException{
 		//Preconditions
 		assertNotNull(c);
 
 		assertClassInvariants();
-		c.assertClassInvariants();
 
 		//do
 		double angle = doGetCentralAngle(c);
@@ -62,23 +59,20 @@ public abstract class AbstractCoordinate implements Coordinate{
 		assert 0 <= angle && angle <= 2*Math.PI;
 
 		assertClassInvariants();
-		c.assertClassInvariants();
 
 		return angle;
 	}
-	public boolean isEqual(Coordinate c){
+	public boolean isEqual(Coordinate c) throws NullPointerException{
 		//Preconditions
 		assertNotNull(c);
 
 		assertClassInvariants();
-		c.assertClassInvariants();
 
 		//do
 		boolean eq = doIsEqual(c);
 
 		//Postconditions
 		assertClassInvariants();
-		c.assertClassInvariants();
 
 		return eq;
 	}

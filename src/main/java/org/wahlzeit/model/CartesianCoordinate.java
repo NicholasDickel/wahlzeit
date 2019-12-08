@@ -13,10 +13,17 @@ public class CartesianCoordinate extends AbstractCoordinate{
 		setCoordinates(x,y,z);
 	}
 
-	public void setCoordinates(double x, double y, double z){
-		setX(x);
-		setY(y);
-		setZ(z);
+	public void setCoordinates(double x, double y, double z) throws IllegalArgumentException{
+		try{
+			setX(x);
+			setY(y);
+			setZ(z);
+		}catch(NullPointerException npe){
+			throw new IllegalArgumentException();
+		}catch(AssertionError ae){
+			throw new IllegalArgumentException();
+		}
+		
 	}
 	
 	public double getX(){

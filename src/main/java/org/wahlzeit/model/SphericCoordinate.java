@@ -11,10 +11,17 @@ public class SphericCoordinate extends AbstractCoordinate{
 		setCoordinates(phi,theta,radius);
 	}
 
-	public void setCoordinates(double phi, double theta, double radius){
-		setPhi(phi);
-		setTheta(theta);
-		setRadius(radius);
+	public void setCoordinates(double phi, double theta, double radius) throws IllegalArgumentException{
+		try{
+			setPhi(phi);
+			setTheta(theta);
+			setRadius(radius);
+		}catch(NullPointerException e){
+			throw new IllegalArgumentException();
+		}catch(AssertionError ae){
+			throw new IllegalArgumentException();
+		}
+		
 	}
 	
 	public double getPhi(){
