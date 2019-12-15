@@ -1,27 +1,22 @@
 package org.wahlzeit.model;
 
-public class SphericCoordinate extends AbstractCoordinate{
-	private double phi, theta, radius;
-
-	public SphericCoordinate(){
-		setCoordinates(0.0,0.0,0.0);
-	}
+public final class SphericCoordinate extends AbstractCoordinate{
+	private final double phi, theta, radius;
 
 	public SphericCoordinate(double phi, double theta, double radius){
-		setCoordinates(phi,theta,radius);
-	}
-
-	public void setCoordinates(double phi, double theta, double radius) throws IllegalArgumentException{
 		try{
-			setPhi(phi);
-			setTheta(theta);
-			setRadius(radius);
+			assert 0 <= phi && phi <= Math.PI;
+			assert 0 <= theta && theta <= 2 * Math.PI;
+			assert radius >= 0;
+			this.phi=phi;
+			this.theta=theta;
+			this.radius=radius;
+			assertClassInvariants();
 		}catch(NullPointerException e){
 			throw new IllegalArgumentException();
 		}catch(AssertionError ae){
 			throw new IllegalArgumentException();
 		}
-		
 	}
 	
 	public double getPhi(){
@@ -36,31 +31,13 @@ public class SphericCoordinate extends AbstractCoordinate{
 		assertClassInvariants();
 		return this.radius;
 	}
-	public void setPhi(double newPhi){
-		assertNotNull(newPhi);
-		assert 0 <= newPhi && newPhi <= Math.PI;
-		this.phi=newPhi;
-		assertClassInvariants();
-	}
-	public void setTheta(double newTheta){
-		assertNotNull(newTheta);
-		assert 0 <= newTheta && newTheta <= 2 * Math.PI;
-		this.theta=newTheta;
-		assertClassInvariants();
-	}
-	public void setRadius(double newRadius){
-		assertNotNull(newRadius);
-		assert newRadius >= 0;
-		this.radius=newRadius;
-		assertClassInvariants();
-	}
 
 	@Override
 	protected CartesianCoordinate doAsCartesianCoordinate(){
 		double x = radius * Math.sin(theta) * Math.cos(phi);
 		double y = radius * Math.sin(theta) * Math.sin(phi);
 		double z = radius * Math.cos(theta);
-		return new CartesianCoordinate(x,y,z);
+		return CoordinateFactory.newCartesianCoordinate(x,y,z);
 	}
 
 	@Override
@@ -80,8 +57,15 @@ public class SphericCoordinate extends AbstractCoordinate{
 	}
 
 	@Override
-	protected boolean doIsEqual(Coordinate coord){
-		return asCartesianCoordinate().isEqual(coord);
+	protected boolean doIsEqual(Coordinate c){
+		SphericCoordinate coord = c.asSphericCoordinate();
+		double eps=1e-5;
+		if(Math.abs(this.getPhi()-coord.getPhi())<eps && Math.abs(this.getTheta()-coord.getTheta())<eps && Math.abs(this.getRadius()-coord.getRadius())<eps){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 
 	@Override

@@ -1,29 +1,21 @@
 package org.wahlzeit.model;
 
 
-public class CartesianCoordinate extends AbstractCoordinate{
+public final class CartesianCoordinate extends AbstractCoordinate{
 
-	private double x, y, z;
-
-	public CartesianCoordinate(){
-		setCoordinates(0.0,0.0,0.0);
-	}
+	private final double x, y, z;
 
 	public CartesianCoordinate(double x, double y, double z){
-		setCoordinates(x,y,z);
-	}
-
-	public void setCoordinates(double x, double y, double z) throws IllegalArgumentException{
 		try{
-			setX(x);
-			setY(y);
-			setZ(z);
+			this.x=x;
+			this.y=y;
+			this.z=z;
+			assertClassInvariants();
 		}catch(NullPointerException npe){
 			throw new IllegalArgumentException();
 		}catch(AssertionError ae){
 			throw new IllegalArgumentException();
 		}
-		
 	}
 	
 	public double getX(){
@@ -38,21 +30,7 @@ public class CartesianCoordinate extends AbstractCoordinate{
 		assertClassInvariants();
 		return z;
 	}
-	public void setX(double newX){
-		assertNotNull(newX);
-		this.x=newX;
-		assertClassInvariants();
-	}
-	public void setY(double newY){
-		assertNotNull(newY);
-		this.y=newY;
-		assertClassInvariants();
-	}
-	public void setZ(double newZ){
-		assertNotNull(newZ);
-		this.z=newZ;
-		assertClassInvariants();
-	}
+	
 
 	private double getDistance(CartesianCoordinate coord){
 		return Math.sqrt(Math.pow(this.getX() - coord.getX(), 2) + Math.pow(this.getY() - coord.getY(), 2) + Math.pow(this.getZ() - coord.getZ(), 2));
@@ -65,11 +43,12 @@ public class CartesianCoordinate extends AbstractCoordinate{
 
 	@Override
 	protected SphericCoordinate doAsSphericCoordinate(){
+		//ground is just a helper, so no need to use the factory here
 		CartesianCoordinate ground=new CartesianCoordinate(0,0,0);
 		double radius=getDistance(ground);
 		double theta=Math.acos(z/radius);
 		double phi=Math.asin(y/(Math.sqrt((x*x)+(y*y))));
-		return new SphericCoordinate(phi,theta,radius);
+		return CoordinateFactory.newSphericCoordinate(phi,theta,radius);
 
 	}
 

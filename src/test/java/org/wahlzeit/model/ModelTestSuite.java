@@ -10,6 +10,7 @@ import org.wahlzeit.model.persistence.PersistenceTestSuite;
 	PersistenceTestSuite.class,
 	AccessRightsTest.class,
 	CoordinateTest.class,
+	CoordinateFactoryTest.class,
 	FlagReasonTest.class,
 	GenderTest.class,
 	GuestTest.class,
