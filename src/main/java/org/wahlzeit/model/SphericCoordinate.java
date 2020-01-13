@@ -1,5 +1,11 @@
 package org.wahlzeit.model;
 
+import org.wahlzeit.model.PatternInstance;
+
+@PatternInstance(
+	patternName="Value Object",
+	participants={"Value Object"}
+)
 public final class SphericCoordinate extends AbstractCoordinate{
 	private final double phi, theta, radius;
 

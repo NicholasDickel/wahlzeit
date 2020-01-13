@@ -1,7 +1,12 @@
 package org.wahlzeit.model;
 
 import com.googlecode.objectify.annotation.Entity;
+import org.wahlzeit.model.PatternInstance;
 
+@PatternInstance(
+	patternName="Abstract Factory",
+	participants={"AbstractFactory","ConcreteFactory"}
+)
 @Entity
 public class SightPhoto extends Photo{
 

@@ -2,7 +2,12 @@ package org.wahlzeit.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.wahlzeit.model.PatternInstance;
 
+@PatternInstance(
+	patternName="Abstract Factory",
+	participants={"AbstractFactory","ConcreteFactory"}
+)
 public class CoordinateFactory{
 	//the two lists are always the same length. 
 	private static List<SphericCoordinate> sphericCoordinates = new ArrayList<SphericCoordinate>();

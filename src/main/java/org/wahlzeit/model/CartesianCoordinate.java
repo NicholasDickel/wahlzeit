@@ -1,6 +1,11 @@
 package org.wahlzeit.model;
 
+import org.wahlzeit.model.PatternInstance;
 
+@PatternInstance(
+	patternName="Value Object",
+	participants={"Value Object"}
+)
 public final class CartesianCoordinate extends AbstractCoordinate{
 
 	private final double x, y, z;
