@@ -10,9 +10,7 @@ import org.wahlzeit.model.PatternInstance;
 @Entity
 public class SightPhoto extends Photo{
 
-	private String sightName; // e.g. Notre-Dame, Loch Ness, Golden Gate Bridge, ...
-	private String sightType; // e.g. Cathedral, Lake, Bridge, ...
-
+	private Sight sight;
 
 	public SightPhoto(){
 		super();
@@ -21,19 +19,11 @@ public class SightPhoto extends Photo{
 		super(myId);
 	}
 
-	public String getSightName(){
-		return sightName;
-	}
-	public String getSightType(){
-		return sightType;
-	}
-	public void setSightName(String name) throws NullPointerException{
-		sightName=name;
-	}
-	public void setSightType(String type) throws NullPointerException{
-		sightType=type;
+	public Sight getSight(){
+		return sight;
 	}
 
-
-
+	public void setSight(Sight s) throws NullPointerException{
+		sight=s;
+	}
 }
